@@ -312,20 +312,54 @@ export async function bulkCreateSubUnitsAction(formData: FormData) {
   revalidatePath("/dashboard/settings");
 }
 
-export async function deleteSubUnitAction(formData: FormData) {
+export async function deleteSubUnitsBulkAction(formData: FormData) {
+  const session = await verifySession();
+  if (!session || (session.role !== "SINDICO" && session.role !== "ADMIN")) return;
+
+  const idsStr = formData.get("ids")?.toString(); // JSON array de IDs
+  if (!idsStr) return;
+
+  try {
+    const ids = JSON.parse(idsStr);
+    if (!Array.isArray(ids)) return;
+
+    // Segurança: Garantir que as unidades pertencem ao prédio do síndico
+    if (session.role === "SINDICO") {
+      await prisma.subUnit.deleteMany({
+        where: { 
+          id: { in: ids },
+          buildingId: session.buildingId 
+        }
+      });
+    } else {
+      await prisma.subUnit.deleteMany({
+        where: { id: { in: ids } }
+      });
+    }
+  } catch (e) {
+    console.error("Erro no bulk delete", e);
+  }
+
+  revalidatePath("/dashboard/settings");
+}
+
+export async function updateSubUnitIdentifierAction(formData: FormData) {
   const session = await verifySession();
   if (!session || (session.role !== "SINDICO" && session.role !== "ADMIN")) return;
 
   const subUnitId = formData.get("subUnitId")?.toString();
-  if (!subUnitId) return;
+  const identifier = formData.get("identifier")?.toString();
+  
+  if (!subUnitId || !identifier) return;
 
-  // Só permite deletar se a unidade pertencer ao building do síndico (ou for admin)
   const subUnit = await prisma.subUnit.findUnique({ where: { id: subUnitId } });
   if (!subUnit) return;
-  
   if (session.role === "SINDICO" && subUnit.buildingId !== session.buildingId) return;
 
-  await prisma.subUnit.delete({ where: { id: subUnitId } });
+  await prisma.subUnit.update({
+    where: { id: subUnitId },
+    data: { identifier }
+  });
 
   revalidatePath("/dashboard/settings");
 }
