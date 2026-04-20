@@ -7,6 +7,8 @@ import Link from "next/link";
 import { updateBuildingInviteCodeAction, bulkCreateSubUnitsAction } from "@/app/actions/admin";
 import { revalidatePath } from "next/cache";
 
+export const dynamic = "force-dynamic";
+
 const prisma = new PrismaClient();
 
 export default async function SettingsPage() {
@@ -24,7 +26,15 @@ export default async function SettingsPage() {
     }
   });
 
-  if (!building) redirect("/dashboard");
+  if (!building) {
+    return (
+      <div className="p-8 text-center bg-red-500/10 border border-red-500/20 rounded-2xl">
+        <h2 className="text-xl font-bold text-red-400">Prédio não localizado</h2>
+        <p className="text-white/60 mt-2">Sua conta de Síndico não possui um condomínio vinculado. Fale com o suporte.</p>
+        <Link href="/dashboard" className="text-primary mt-4 inline-block font-bold">Voltar ao Início</Link>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-8 pb-12">
