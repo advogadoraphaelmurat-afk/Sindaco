@@ -311,3 +311,21 @@ export async function bulkCreateSubUnitsAction(formData: FormData) {
   revalidatePath("/dashboard/buildings/[id]");
   revalidatePath("/dashboard/settings");
 }
+
+export async function deleteSubUnitAction(formData: FormData) {
+  const session = await verifySession();
+  if (!session || (session.role !== "SINDICO" && session.role !== "ADMIN")) return;
+
+  const subUnitId = formData.get("subUnitId")?.toString();
+  if (!subUnitId) return;
+
+  // Só permite deletar se a unidade pertencer ao building do síndico (ou for admin)
+  const subUnit = await prisma.subUnit.findUnique({ where: { id: subUnitId } });
+  if (!subUnit) return;
+  
+  if (session.role === "SINDICO" && subUnit.buildingId !== session.buildingId) return;
+
+  await prisma.subUnit.delete({ where: { id: subUnitId } });
+
+  revalidatePath("/dashboard/settings");
+}

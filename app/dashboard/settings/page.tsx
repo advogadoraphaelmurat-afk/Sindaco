@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { GlassCard } from "@/components/GlassCard";
 import { Settings, Key, LayoutGrid, Plus, Trash2, ArrowRight, Users } from "lucide-react";
 import Link from "next/link";
-import { updateBuildingInviteCodeAction, bulkCreateSubUnitsAction } from "@/app/actions/admin";
+import { updateBuildingInviteCodeAction, bulkCreateSubUnitsAction, deleteSubUnitAction } from "@/app/actions/admin";
 import { revalidatePath } from "next/cache";
 
 export const dynamic = "force-dynamic";
@@ -20,6 +20,9 @@ export default async function SettingsPage() {
   const building = await prisma.building.findUnique({
     where: { id: session.buildingId! },
     include: {
+      subUnits: {
+        orderBy: { identifier: 'asc' }
+      },
       _count: {
         select: { subUnits: true }
       }
@@ -156,7 +159,64 @@ export default async function SettingsPage() {
                 </div>
             </div>
         </GlassCard>
+        {/* LISTAGEM DE UNIDADES EXISTENTES */}
+      <div className="space-y-4">
+        <h2 className="text-lg font-bold text-white flex items-center gap-2 px-1">
+          <Users className="w-5 h-5 text-emerald-400" />
+          Unidades Cadastradas
+        </h2>
+        <GlassCard delay={0.5} className="p-0 overflow-hidden">
+            <div className="overflow-x-auto">
+                <table className="w-full text-left border-collapse">
+                    <thead>
+                        <tr className="bg-white/5 border-b border-white/5">
+                            <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-white/40 font-mono">Identificador</th>
+                            <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-white/40 font-mono">Status</th>
+                            <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-white/40 font-mono">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody className="divide-y divide-white/5">
+                        {building.subUnits.length === 0 ? (
+                            <tr>
+                                <td colSpan={3} className="px-6 py-12 text-center text-white/20 italic">
+                                    Nenhuma unidade cadastrada. Use a criação em lote acima.
+                                </td>
+                            </tr>
+                        ) : (
+                            building.subUnits.map((unit) => (
+                                <tr key={unit.id} className="hover:bg-white/[0.02] transition-colors group">
+                                    <td className="px-6 py-4">
+                                        <span className="font-bold text-white group-hover:text-primary transition-colors">{unit.identifier}</span>
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        {unit.userId ? (
+                                            <span className="flex items-center gap-1.5 text-xs text-emerald-400 font-bold bg-emerald-500/10 px-2 py-1 rounded-lg border border-emerald-500/20">
+                                                <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> Ocupada
+                                            </span>
+                                        ) : (
+                                            <span className="text-xs text-white/20 font-bold bg-white/5 px-2 py-1 rounded-lg border border-white/10 uppercase tracking-tighter">Vazia</span>
+                                        )}
+                                    </td>
+                                    <td className="px-6 py-4 text-right">
+                                        <form action={deleteSubUnitAction}>
+                                            <input type="hidden" name="subUnitId" value={unit.id} />
+                                            <button 
+                                                className="w-8 h-8 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 flex items-center justify-center transition-all ml-auto"
+                                                title="Remover Unidade"
+                                            >
+                                                <Trash2 className="w-4 h-4" />
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            ))
+                        )}
+                    </tbody>
+                </table>
+            </div>
+        </GlassCard>
       </div>
+    </div>
     </div>
   );
 }
