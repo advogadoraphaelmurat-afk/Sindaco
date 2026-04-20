@@ -1,7 +1,7 @@
 import { verifySession } from "@/lib/auth";
 import { PrismaClient } from "@prisma/client";
 import { GlassCard } from "@/components/GlassCard";
-import { Building2, Users, ClipboardList, MessageSquare, TrendingUp } from "lucide-react";
+import { Building2, Users, ClipboardList, MessageSquare, TrendingUp, ArrowRight, Settings } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
@@ -179,6 +179,25 @@ export default async function DashboardPage() {
         <h1 className="text-3xl font-bold tracking-tight text-white mb-2">Visão Geral</h1>
         <p className="text-white/60">Bem-vindo(a) de volta! Você está conectado como <strong className="text-primary">{session.role}</strong>.</p>
       </div>
+
+      {session.role === "SINDICO" && (
+        <div className="grid grid-cols-1 gap-4 mt-8">
+           <Link href="/dashboard/settings" className="group">
+             <div className="bg-primary/10 border border-primary/20 hover:border-primary/40 p-6 rounded-2xl flex items-center justify-between transition-all shadow-lg shadow-primary/5">
+               <div className="flex items-center gap-4">
+                 <div className="w-14 h-14 rounded-2xl bg-primary/20 text-primary flex items-center justify-center shadow-inner">
+                     <Settings className="w-7 h-7" />
+                 </div>
+                 <div>
+                     <h2 className="text-xl font-bold text-white">Configurações de Acesso</h2>
+                     <p className="text-white/50 text-sm">Gerencie o código de convite e crie as unidades/vagas do prédio.</p>
+                 </div>
+               </div>
+               <ArrowRight className="w-6 h-6 text-primary group-hover:translate-x-2 transition-transform" />
+             </div>
+           </Link>
+        </div>
+      )}
 
       {session.role === "SINDICO" && (
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
