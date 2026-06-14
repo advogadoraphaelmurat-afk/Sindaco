@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 // Chave secreta super segura do JWT (em prod virá do process.env.JWT_SECRET)
-const secretKey = "super-secret-sindaco-key";
+const secretKey = process.env.JWT_SECRET || "super-secret-sindaco-key";
 const key = new TextEncoder().encode(secretKey);
 
 interface SessionPayload {

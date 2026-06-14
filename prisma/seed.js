@@ -33,6 +33,7 @@ async function main() {
       address: 'Rua do Sol, 100 - Centro',
       active: true,
       maxSubUnits: 50,
+      inviteCode: 'AURORA2026',
     }
   });
 
