@@ -57,9 +57,8 @@ export default async function DashboardLayout({
       
       {/* ==================== SIDEBAR DESKTOP (lg+) ==================== */}
       <aside className="hidden lg:flex w-64 border-r border-white/5 bg-white/[0.02] flex-col backdrop-blur-md shrink-0 sticky top-0 h-screen">
-        <div className="p-6 flex items-center gap-3 border-b border-white/5">
-          <Image src="/logo.png" alt="Sindaco Logo" width={32} height={32} className="object-contain drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
-          <span className="font-bold text-lg tracking-tight">Sindaco</span>
+        <div className="p-5 flex items-center justify-center border-b border-white/5">
+          <Image src="/sindaco-logo.png" alt="Sindaco" width={180} height={45} className="object-contain" priority />
         </div>
         
         <nav className="flex-1 p-4 space-y-1">

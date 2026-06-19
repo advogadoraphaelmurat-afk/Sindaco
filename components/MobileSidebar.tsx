@@ -30,9 +30,8 @@ export function MobileSidebar({ menu, email, role }: MobileSidebarProps) {
     <>
       {/* Mobile Top Bar */}
       <div className="lg:hidden fixed top-0 left-0 right-0 z-50 h-14 bg-[#0B0F19]/95 backdrop-blur-xl border-b border-white/5 flex items-center justify-between px-4 safe-area-inset">
-        <div className="flex items-center gap-2">
-          <Image src="/logo.png" alt="Sindaco" width={26} height={26} className="object-contain drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
-          <span className="font-bold text-base tracking-tight text-white">Sindaco</span>
+        <div className="flex items-center">
+          <Image src="/sindaco-logo.png" alt="Sindaco" width={120} height={30} className="object-contain" priority />
         </div>
         <div className="flex items-center gap-2">
           <form action={logoutAction}>

@@ -12,17 +12,15 @@ export function LandingNavbar() {
       className="fixed top-0 left-0 right-0 z-50 flex justify-center p-6"
     >
       <div className="w-full max-w-7xl bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl px-6 py-3 flex items-center justify-between shadow-2xl">
-        <Link href="/" className="flex items-center gap-3 group">
+        <Link href="/" className="flex items-center group">
           <Image 
-            src="/logo.png" 
-            alt="Sindaco Logo" 
-            width={32} 
-            height={32} 
-            className="group-hover:rotate-12 transition-transform duration-500"
+            src="/sindaco-logo.png" 
+            alt="Sindaco" 
+            width={140} 
+            height={35} 
+            className="object-contain group-hover:brightness-110 transition-all duration-300"
+            priority
           />
-          <span className="font-bold text-xl tracking-tight bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent">
-            Sindaco
-          </span>
         </Link>
 
         <div className="hidden md:flex items-center gap-8">

@@ -8,9 +8,8 @@ export function LandingFooter() {
     <footer className="border-t border-white/5 py-16 bg-black/20">
       <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-12">
         <div className="space-y-4 text-center md:text-left">
-          <Link href="/" className="flex items-center justify-center md:justify-start gap-3">
-            <Image src="/logo.png" alt="Sindaco Logo" width={40} height={40} />
-            <span className="font-bold text-2xl">Sindaco</span>
+          <Link href="/" className="flex items-center justify-center md:justify-start">
+            <Image src="/sindaco-logo.png" alt="Sindaco" width={160} height={40} className="object-contain" />
           </Link>
           <p className="text-white/30 text-sm max-w-xs">
             A plataforma definitiva para assembleias digitais e governança condominial inteligente.
