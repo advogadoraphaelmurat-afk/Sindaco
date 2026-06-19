@@ -2,10 +2,11 @@ import { defineConfig, devices } from "@playwright/test";
 
 export default defineConfig({
   testDir: "./e2e",
-  fullyParallel: false, // Executar em série para evitar colisões no banco de dados de desenvolvimento
+  fullyParallel: false,
   forbidOnly: !!process.env.CI,
-  retries: 0,
-  workers: 1, // Garantir execução em thread única para evitar conflitos de transações
+  retries: 1,
+  workers: 1,
+  timeout: 60000,
   reporter: "list",
   use: {
     baseURL: "http://localhost:3000",

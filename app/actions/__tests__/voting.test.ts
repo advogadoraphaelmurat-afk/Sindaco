@@ -14,12 +14,22 @@ jest.mock("@prisma/client", () => {
       findUnique: jest.fn(),
       create: jest.fn(),
     },
+    auditLog: {
+      create: jest.fn(),
+    },
+    $transaction: jest.fn().mockImplementation(async (callback) => {
+      return callback(mockPrismaInstance);
+    }),
   };
   (global as any).mockPrisma = mockPrismaInstance;
   return {
     PrismaClient: jest.fn().mockImplementation(() => mockPrismaInstance),
   };
 });
+
+jest.mock("next/headers", () => ({
+  headers: jest.fn().mockReturnValue(new Map([["x-forwarded-for", "127.0.0.1"]])),
+}));
 
 // 2. Agora sim importamos as funções do arquivo de actions
 import { createVotingAction, submitVoteAction } from "../voting";
@@ -76,6 +86,14 @@ describe("Voting Server Actions", () => {
             create: [{ text: "A favor" }, { text: "Contra" }],
           },
         },
+      });
+
+      expect(mockPrisma.auditLog.create).toHaveBeenCalledWith({
+        data: expect.objectContaining({
+          action: "VOTING_CREATED",
+          entityType: "Voting",
+          entityId: "voting-abc",
+        }),
       });
     });
 
@@ -141,11 +159,20 @@ describe("Voting Server Actions", () => {
 
       expect(result).toEqual({ success: true });
       expect(mockPrisma.vote.create).toHaveBeenCalledWith({
-        data: {
+        data: expect.objectContaining({
           votingId: "votacao-123",
           optionId: "opcao-favor",
           subUnitId: "apto-101",
-        },
+          ipAddress: "127.0.0.1",
+          hash: expect.any(String),
+        }),
+      });
+      expect(mockPrisma.auditLog.create).toHaveBeenCalledWith({
+        data: expect.objectContaining({
+          action: "VOTE_SUBMITTED",
+          entityType: "Vote",
+          entityId: "voto-789",
+        }),
       });
       expect(revalidatePath).toHaveBeenCalledWith("/dashboard/votings/votacao-123");
     });

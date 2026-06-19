@@ -14,6 +14,7 @@ const config: Config = {
     // Handle module aliases
     "^@/(.*)$": "<rootDir>/$1",
   },
+  testPathIgnorePatterns: ["<rootDir>/e2e/"],
   transformIgnorePatterns: [
     "/node_modules/",
   ],

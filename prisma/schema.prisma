@@ -52,6 +52,7 @@ model User {
   votings      Voting[]
   messages     Message[]
   supportTickets SupportTicket[]
+  auditLogs    AuditLog[]
 }
 model SubUnit {
   id         String   @id @default(cuid())
@@ -113,12 +114,26 @@ model Vote {
   votingId   String
   optionId   String
   subUnitId  String
+  hash       String?  // Hash criptográfico para auditoria do voto
+  ipAddress  String?
 
   voting   Voting     @relation(fields: [votingId], references: [id], onDelete: Cascade)
   option   VoteOption @relation(fields: [optionId], references: [id], onDelete: Cascade)
   subUnit  SubUnit    @relation(fields: [subUnitId], references: [id], onDelete: Cascade)
 
   @@unique([votingId, subUnitId]) // Uma subUnidade vota apenas uma vez por votação
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  userId     String?
+  action     String
+  entityType String
+  entityId   String?
+  details    String?
+  timestamp  DateTime @default(now())
+
+  user       User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
 }
 
 model Message {

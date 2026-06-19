@@ -1,0 +1,78 @@
+
+> vota-condominios@0.1.0 dev
+> next dev --turbopack
+
+▲ Next.js 16.2.4 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.100.9:3000
+- Environments: .env
+✓ Ready in 10.5s
+⚠ Slow filesystem detected. The benchmark took 210ms. If C:\Users\Murat\vota-condominios\.next/dev is a network drive, consider moving it to a local folder.
+See more: https://nextjs.org/docs/app/guides/local-development
+
+ GET / 200 in 3.4s (next.js: 2.5s, application-code: 881ms)
+ GET / 200 in 196ms (next.js: 23ms, application-code: 173ms)
+ GET /login 200 in 1361ms (next.js: 449ms, application-code: 913ms)
+ GET /dashboard 200 in 1778ms (next.js: 876ms, application-code: 903ms)
+ POST /login 303 in 4.2s (next.js: 31ms, application-code: 4.2s)
+  └─ ƒ loginAction(null, {}) in 2054ms app/actions/auth.ts
+ GET /dashboard/votings/new 200 in 1195ms (next.js: 368ms, application-code: 826ms)
+ GET /dashboard/votings 200 in 3.5s (next.js: 3.1s, application-code: 458ms)
+ POST /dashboard/votings/new 303 in 4.1s (next.js: 38ms, application-code: 4.0s)
+  └─ ƒ createVotingAction(null, {}) in 388ms app/actions/voting.ts
+ GET /login 200 in 548ms (next.js: 29ms, application-code: 520ms)
+ GET /dashboard 200 in 731ms (next.js: 48ms, application-code: 684ms)
+ POST /login 303 in 1317ms (next.js: 36ms, application-code: 1281ms)
+  └─ ƒ loginAction(null, {}) in 481ms app/actions/auth.ts
+ GET /dashboard/votings 200 in 903ms (next.js: 28ms, application-code: 875ms)
+○ Compiling /dashboard/votings/[id] ...
+ GET /dashboard/votings/cmqfj5u660001554osodbwqmm 200 in 17.9s (next.js: 16.9s, application-code: 973ms)
+✓ Finished filesystem cache database compaction in 10.5s
+ GET /login 200 in 303ms (next.js: 20ms, application-code: 283ms)
+ GET /dashboard 200 in 652ms (next.js: 68ms, application-code: 584ms)
+ POST /login 303 in 1499ms (next.js: 61ms, application-code: 1437ms)
+  └─ ƒ loginAction(null, {}) in 668ms app/actions/auth.ts
+ GET /dashboard/votings/new 200 in 969ms (next.js: 33ms, application-code: 936ms)
+ GET /dashboard/votings 200 in 444ms (next.js: 27ms, application-code: 417ms)
+ POST /dashboard/votings/new 303 in 827ms (next.js: 41ms, application-code: 786ms)
+  └─ ƒ createVotingAction(null, {}) in 268ms app/actions/voting.ts
+ GET /login 200 in 583ms (next.js: 34ms, application-code: 549ms)
+ GET /dashboard 200 in 745ms (next.js: 42ms, application-code: 703ms)
+ POST /login 303 in 1325ms (next.js: 30ms, application-code: 1295ms)
+  └─ ƒ loginAction(null, {}) in 473ms app/actions/auth.ts
+ GET /dashboard/votings 200 in 562ms (next.js: 27ms, application-code: 535ms)
+ GET /dashboard/votings/cmqfj7a8m0007554o1v8ciquq 200 in 1144ms (next.js: 301ms, application-code: 843ms)
+ GET / 200 in 1123ms (next.js: 866ms, application-code: 257ms)
+ GET / 200 in 264ms (next.js: 41ms, application-code: 223ms)
+ GET /login 200 in 341ms (next.js: 31ms, application-code: 311ms)
+ GET /dashboard 200 in 536ms (next.js: 56ms, application-code: 480ms)
+ POST /login 303 in 1164ms (next.js: 27ms, application-code: 1137ms)
+  └─ ƒ loginAction(null, {}) in 519ms app/actions/auth.ts
+ GET /dashboard/votings/new 200 in 767ms (next.js: 27ms, application-code: 740ms)
+ GET /dashboard/votings 200 in 687ms (next.js: 81ms, application-code: 606ms)
+ POST /dashboard/votings/new 303 in 1161ms (next.js: 55ms, application-code: 1107ms)
+  └─ ƒ createVotingAction(null, {}) in 237ms app/actions/voting.ts
+ GET /login 200 in 551ms (next.js: 30ms, application-code: 521ms)
+ GET /dashboard 200 in 841ms (next.js: 102ms, application-code: 739ms)
+ POST /login 303 in 1736ms (next.js: 68ms, application-code: 1667ms)
+  └─ ƒ loginAction(null, {}) in 667ms app/actions/auth.ts
+ GET /dashboard/votings 200 in 1625ms (next.js: 42ms, application-code: 1583ms)
+ GET /dashboard/votings/cmqfja4id000d554o5lftl3ob 200 in 1196ms (next.js: 283ms, application-code: 912ms)
+ POST /dashboard/votings/cmqfja4id000d554o5lftl3ob 200 in 1545ms (next.js: 34ms, application-code: 1511ms)
+  └─ ƒ submitVoteAction(null, {}) in 419ms app/actions/voting.ts
+ GET /login 200 in 1368ms (next.js: 921ms, application-code: 447ms)
+ GET /dashboard 200 in 1702ms (next.js: 1187ms, application-code: 516ms)
+ POST /login 303 in 3.8s (next.js: 1231ms, application-code: 2.6s)
+  └─ ƒ loginAction(null, {}) in 699ms app/actions/auth.ts
+ GET /dashboard/votings/new 200 in 2.6s (next.js: 767ms, application-code: 1846ms)
+ GET /dashboard/votings 200 in 1882ms (next.js: 1438ms, application-code: 444ms)
+ POST /dashboard/votings/new 303 in 3.3s (next.js: 1115ms, application-code: 2.2s)
+  └─ ƒ createVotingAction(null, {}) in 189ms app/actions/voting.ts
+ GET /login 200 in 1443ms (next.js: 888ms, application-code: 555ms)
+ GET /dashboard 200 in 2.5s (next.js: 1789ms, application-code: 737ms)
+ POST /login 303 in 6.6s (next.js: 3.1s, application-code: 3.5s)
+  └─ ƒ loginAction(null, {}) in 853ms app/actions/auth.ts
+ GET /dashboard/votings 200 in 1707ms (next.js: 590ms, application-code: 1117ms)
+ GET /dashboard/votings/cmqfjbb0r000n554o14zp76og 200 in 1597ms (next.js: 663ms, application-code: 934ms)
+ POST /dashboard/votings/cmqfjbb0r000n554o14zp76og 200 in 1931ms (next.js: 563ms, application-code: 1368ms)
+  └─ ƒ submitVoteAction(null, {}) in 348ms app/actions/voting.ts
