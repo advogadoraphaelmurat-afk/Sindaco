@@ -94,16 +94,16 @@ export default async function MessagesListPage() {
                    </div>
                 ) : (isSindico && !msg.isResolved) ? (
                    <div className="p-6 bg-white/5">
-                      <form action={replyMessageAction} className="flex gap-4">
+                      <form action={replyMessageAction} className="flex flex-col sm:flex-row gap-4">
                          <input type="hidden" name="messageId" value={msg.id} />
                          <input 
                            type="text" 
                            name="response" 
                            placeholder="Digite a resposta encerrenta para este chamado..." 
                            required 
-                           className="flex-1 bg-black/30 border border-white/10 rounded-xl px-4 text-sm text-white focus:outline-none focus:border-primary transition-colors"
+                           className="flex-1 bg-black/30 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-primary transition-colors"
                          />
-                         <button type="submit" className="bg-primary hover:bg-primary/80 text-white font-bold px-6 py-3 rounded-xl transition-all shadow-lg flex items-center gap-2">
+                         <button type="submit" className="bg-primary hover:bg-primary/80 text-white font-bold px-6 py-3 rounded-xl transition-all shadow-lg flex items-center justify-center gap-2 whitespace-nowrap">
                             Aprovar & Responder <Send className="w-4 h-4" />
                          </button>
                       </form>

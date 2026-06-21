@@ -31,6 +31,12 @@ jest.mock("next/headers", () => ({
   headers: jest.fn().mockReturnValue(new Map([["x-forwarded-for", "127.0.0.1"]])),
 }));
 
+// Mock do módulo de email para evitar o carregamento do resend/postal-mime
+// que depende de TextEncoder (não disponível no jsdom)
+jest.mock("@/lib/email", () => ({
+  sendVotingCreatedEmail: jest.fn().mockResolvedValue({ success: true, simulated: true }),
+}));
+
 // 2. Agora sim importamos as funções do arquivo de actions
 import { createVotingAction, submitVoteAction } from "../voting";
 
